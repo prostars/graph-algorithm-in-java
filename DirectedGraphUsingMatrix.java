@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class DirectedGraphUsingMatrix {
@@ -8,13 +10,6 @@ public class DirectedGraphUsingMatrix {
     visited = new boolean[getVertexCount()];
   }
 
-  public void depthFirstSearchForAll() {
-    clearVisited();
-    for (int i = 0; i < getVertexCount(); i++)
-      if (!visited[i])
-        depthFirstSearch(i);
-  }
-
   public void depthFirstSearch(int startVertex) {
     visited[startVertex] = true;
     System.out.println(startVertex);
@@ -22,6 +17,13 @@ public class DirectedGraphUsingMatrix {
     for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++)
       if (!visited[targetVertex] && getAdjacencyMatrix()[startVertex][targetVertex] == 1)
         depthFirstSearch(targetVertex);
+  }
+
+  public void depthFirstSearchForAll() {
+    clearVisited();
+    for (int i = 0; i < getVertexCount(); i++)
+      if (!visited[i])
+        depthFirstSearch(i);
   }
 
   public void depthFirstSearchForAllUsingStack() {
@@ -38,6 +40,47 @@ public class DirectedGraphUsingMatrix {
           for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++) {
             if (getAdjacencyMatrix()[startVertex][targetVertex] == 1 && !visited[targetVertex]) {
               stack.push(targetVertex);
+              visited[targetVertex] = true;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  public void breadthFirstSearch(int startVertex) {
+    Queue<Integer> queue = new LinkedList<>();
+    clearVisited();
+    if (!visited[startVertex]) {
+      queue.offer(startVertex);
+      visited[startVertex] = true;
+      while (!queue.isEmpty()) {
+        int currentVertex = queue.poll();
+        System.out.println(currentVertex);
+        for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++) {
+          if (getAdjacencyMatrix()[currentVertex][targetVertex] == 1 && !visited[targetVertex]) {
+            queue.offer(targetVertex);
+            visited[targetVertex] = true;
+          }
+        }
+      }
+    }
+  }
+
+  public void breadthFirstSearchForAll() {
+    Queue<Integer> queue = new LinkedList<>();
+    clearVisited();
+
+    for (int startVertex = 0; startVertex < getVertexCount(); startVertex++) {
+      if (!visited[startVertex]) {
+        queue.offer(startVertex);
+        visited[startVertex] = true;
+        while (!queue.isEmpty()) {
+          Integer currentVertex = queue.poll();
+          System.out.println(currentVertex);
+          for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++) {
+            if (getAdjacencyMatrix()[startVertex][targetVertex] == 1 && !visited[targetVertex]) {
+              queue.offer(targetVertex);
               visited[targetVertex] = true;
             }
           }

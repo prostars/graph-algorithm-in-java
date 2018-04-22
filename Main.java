@@ -5,7 +5,7 @@ public class Main {
 
   public static void main(String[] args) {
     int[][] matrix =
-      {   //   0  1  2  3  4  5  6
+      {//0  1  2  3  4  5  6
         {0, 1, 1, 0, 0, 0, 0},  // 0
         {1, 0, 0, 0, 1, 0, 0},  // 1
         {1, 0, 0, 0, 0, 1, 0},  // 2
@@ -16,12 +16,18 @@ public class Main {
       };
 
     DirectedGraphUsingMatrix graphUsingMatrix = new DirectedGraphUsingMatrix(matrix);
-    graphUsingMatrix.depthFirstSearch(0);
-    System.out.println("-----------------------------------");
-    graphUsingMatrix.depthFirstSearchForAll();
-    System.out.println("-----------------------------------");
-    graphUsingMatrix.depthFirstSearchForAllUsingStack();
     System.out.println("===================================");
+    System.out.println("- DirectedGraphUsingMatrix -");
+    System.out.println("- depthFirstSearch -");
+    graphUsingMatrix.depthFirstSearch(0);
+    System.out.println("- depthFirstSearchForAll -");
+    graphUsingMatrix.depthFirstSearchForAll();
+    System.out.println("- depthFirstSearchForAllUsingStack -");
+    graphUsingMatrix.depthFirstSearchForAllUsingStack();
+    System.out.println("- breadthFirstSearch -");
+    graphUsingMatrix.breadthFirstSearch(0);
+    System.out.println("- breadthFirstSearchForAll -");
+    graphUsingMatrix.breadthFirstSearchForAll();
 
     List<List<Integer>> adjacencyList = new ArrayList<>();
     adjacencyList.add(new ArrayList<>());
@@ -45,11 +51,17 @@ public class Main {
     adjacencyList.get(5).add(4);
     adjacencyList.get(6).add(5);
     DirectedGraphUsingList graphUsingList = new DirectedGraphUsingList(adjacencyList);
+    System.out.println("===================================");
+    System.out.println("- DirectedGraphUsingList -");
+    System.out.println("- depthFirstSearch -");
     graphUsingList.depthFirstSearch(0);
-    System.out.println("-----------------------------------");
+    System.out.println("- depthFirstSearchForAll -");
     graphUsingList.depthFirstSearchForAll();
-    System.out.println("-----------------------------------");
+    System.out.println("- depthFirstSearchForAllUsingStack -");
     graphUsingList.depthFirstSearchForAllUsingStack();
-    System.out.println("-----------------------------------");
+    System.out.println("- breadthFirstSearch -");
+    graphUsingList.breadthFirstSearch(0);
+    System.out.println("- breadthFirstSearchForAll -");
+    graphUsingList.breadthFirstSearchForAll();
   }
 }
