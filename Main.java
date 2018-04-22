@@ -16,11 +16,11 @@ public class Main {
       };
 
     DirectedGraphUsingMatrix graphUsingMatrix = new DirectedGraphUsingMatrix(matrix);
-    graphUsingMatrix.dfs(0);
+    graphUsingMatrix.depthFirstSearch(0);
     System.out.println("-----------------------------------");
-    graphUsingMatrix.dfsForAll();
+    graphUsingMatrix.depthFirstSearchForAll();
     System.out.println("-----------------------------------");
-    graphUsingMatrix.dfsForAllUsingStack();
+    graphUsingMatrix.depthFirstSearchForAllUsingStack();
     System.out.println("===================================");
 
     List<List<Integer>> adjacencyList = new ArrayList<>();
@@ -45,11 +45,11 @@ public class Main {
     adjacencyList.get(5).add(4);
     adjacencyList.get(6).add(5);
     DirectedGraphUsingList graphUsingList = new DirectedGraphUsingList(adjacencyList);
-    graphUsingList.dfs(0);
+    graphUsingList.depthFirstSearch(0);
     System.out.println("-----------------------------------");
-    graphUsingList.dfsForAll();
+    graphUsingList.depthFirstSearchForAll();
     System.out.println("-----------------------------------");
-    graphUsingList.dfsForAllUsingStack();
+    graphUsingList.depthFirstSearchForAllUsingStack();
     System.out.println("-----------------------------------");
   }
 }

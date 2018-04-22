@@ -9,25 +9,25 @@ public class DirectedGraphUsingList {
     visited = new boolean[getVertexCount()];
   }
 
-  public void dfsForAll() {
+  public void depthFirstSearchForAll() {
     clearVisited();
     for (int vertex = 0; vertex < getVertexCount(); vertex++)
       if (!visited[vertex])
-        dfs(vertex);
+        depthFirstSearch(vertex);
   }
 
-  public void dfs(int startVertex) {
+  public void depthFirstSearch(int startVertex) {
     visited[startVertex] = true;
     System.out.println(startVertex);
 
     List<Integer> adj = getAdjacencyList().get(startVertex);
     adj.forEach(targetVertex -> {
       if (!visited[targetVertex])
-        dfs(targetVertex);
+        depthFirstSearch(targetVertex);
     });
   }
 
-  public void dfsForAllUsingStack() {
+  public void depthFirstSearchForAllUsingStack() {
     Stack<Integer> stack = new Stack<>();
     clearVisited();
 

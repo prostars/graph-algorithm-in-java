@@ -8,23 +8,23 @@ public class DirectedGraphUsingMatrix {
     visited = new boolean[getVertexCount()];
   }
 
-  public void dfsForAll() {
+  public void depthFirstSearchForAll() {
     clearVisited();
     for (int i = 0; i < getVertexCount(); i++)
       if (!visited[i])
-        dfs(i);
+        depthFirstSearch(i);
   }
 
-  public void dfs(int startVertex) {
+  public void depthFirstSearch(int startVertex) {
     visited[startVertex] = true;
     System.out.println(startVertex);
 
     for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++)
       if (!visited[targetVertex] && getAdjacencyMatrix()[startVertex][targetVertex] == 1)
-        dfs(targetVertex);
+        depthFirstSearch(targetVertex);
   }
 
-  public void dfsForAllUsingStack() {
+  public void depthFirstSearchForAllUsingStack() {
     Stack<Integer> stack = new Stack<>();
     clearVisited();
 
