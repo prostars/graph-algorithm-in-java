@@ -11,37 +11,37 @@ public class DirectedGraphUsingMatrix {
         visited = new boolean[getVertexCount()];
     }
 
-    public void dfsMatrix() {
+    public void dfsForAll() {
         clearVisited();
         for (int i = 0; i < getVertexCount(); i++)
             if (!visited[i])
                 dfs(i);
     }
 
-    public void dfs(int vertex) {
-        visited[vertex] = true;
-        System.out.println(vertex);
+    public void dfs(int startVertex) {
+        visited[startVertex] = true;
+        System.out.println(startVertex);
 
-        for (int v = 0; v < getVertexCount(); v++)
-            if (!visited[v] && getAdjacencyMatrix()[vertex][v] == 1)
-                dfs(v);
+        for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++)
+            if (!visited[targetVertex] && getAdjacencyMatrix()[startVertex][targetVertex] == 1)
+                dfs(targetVertex);
     }
 
-    public void dfsUsingStack() {
+    public void dfsForAllUsingStack() {
         Stack<Integer> stack = new Stack<Integer>();
         clearVisited();
 
-        for (int i = 0; i < getVertexCount(); i++) {
-            if (!visited[i]) {
-                stack.push(i);
-                visited[i] = true;
+        for (int startVertex = 0; startVertex < getVertexCount(); startVertex++) {
+            if (!visited[startVertex]) {
+                stack.push(startVertex);
+                visited[startVertex] = true;
                 while (!stack.isEmpty()) {
-                    int vertex = stack.pop();
-                    System.out.println(vertex);
-                    for (int j = 0; j < getVertexCount(); j++) {
-                        if (getAdjacencyMatrix()[i][j] == 1 && !visited[j]) {
-                            stack.push(j);
-                            visited[j] = true;
+                    int currentVertex = stack.pop();
+                    System.out.println(currentVertex);
+                    for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++) {
+                        if (getAdjacencyMatrix()[startVertex][targetVertex] == 1 && !visited[targetVertex]) {
+                            stack.push(targetVertex);
+                            visited[targetVertex] = true;
                         }
                     }
                 }
