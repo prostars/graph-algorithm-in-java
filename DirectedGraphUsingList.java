@@ -1,10 +1,8 @@
-import com.sun.istack.internal.NotNull;
-import org.omg.PortableInterceptor.INACTIVE;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class DirectedGraphUsingList {
+
   public DirectedGraphUsingList(List<List<Integer>> adjacencyList) {
     this.adjacencyList = adjacencyList;
     setVertexCount(adjacencyList.size());
@@ -27,6 +25,29 @@ public class DirectedGraphUsingList {
       if (!visited[targetVertex])
         dfs(targetVertex);
     });
+  }
+
+  public void dfsForAllUsingStack() {
+    Stack<Integer> stack = new Stack<>();
+    clearVisited();
+
+    for (int startVertex = 0; startVertex < getVertexCount(); startVertex++) {
+      if (!visited[startVertex]) {
+        stack.push(startVertex);
+        visited[startVertex] = true;
+        while (!stack.isEmpty()) {
+          int currentVertex = stack.pop();
+          System.out.println(currentVertex);
+          List<Integer> adj = getAdjacencyList().get(currentVertex);
+          adj.forEach(targetVertex -> {
+            if (!visited[targetVertex]) {
+              stack.push(targetVertex);
+              visited[targetVertex] = true;
+            }
+          });
+        }
+      }
+    }
   }
 
   public int getVertexCount() {
