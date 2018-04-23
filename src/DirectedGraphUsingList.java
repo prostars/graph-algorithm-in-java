@@ -44,21 +44,48 @@ public class DirectedGraphUsingList {
     for (int startVertex = 0; startVertex < getVertexCount(); startVertex++) {
       if (!visited[startVertex]) {
         stack.push(startVertex);
-        visited[startVertex] = true;
         while (!stack.isEmpty()) {
           int currentVertex = stack.pop();
+          visited[currentVertex] = true;
           System.out.println(currentVertex);
           List<Integer> adj = getAdjacencyList().get(currentVertex);
           adj.forEach(targetVertex -> {
-            if (!visited[targetVertex]) {
+            if (!visited[targetVertex])
               stack.push(targetVertex);
-              visited[targetVertex] = true;
-            }
           });
         }
       }
     }
   }
+
+  public boolean hasCycleUsingStack(int startVertex) {
+    Stack<Integer> stack = new Stack<>();
+    
+    if (!visited[startVertex]) {
+      stack.push(startVertex);
+
+      while(!stack.isEmpty()) {
+        int currentVertex = stack.pop();
+        visited[currentVertex] = true;
+        visitHistoryForCheckingCycle[currentVertex] = true;
+
+        if (getAdjacencyList().get(currentVertex).isEmpty()) {
+          visitHistoryForCheckingCycle[currentVertex] = false;
+          return false;
+        }
+
+        for (Integer targetVertex : getAdjacencyList().get(currentVertex)) {
+          if (!visited[targetVertex])
+            stack.push(targetVertex);
+          else if (visitHistoryForCheckingCycle[targetVertex])
+            return true;
+        }
+      }
+    }
+    visitHistoryForCheckingCycle[startVertex] = false;
+    return false;
+  }
+
 
   public void breadthFirstSearch(int startVertex) {
     Queue<Integer> queue = new LinkedList<>();
@@ -86,12 +113,12 @@ public class DirectedGraphUsingList {
       breadthFirstSearch(startVertex);
   }
 
-  public boolean hasCyclic(int startVertex) {
+  public boolean hasCycle(int startVertex) {
     if (!visited[startVertex]) {
       visited[startVertex] = true;
       visitHistoryForCheckingCycle[startVertex] = true;
       for (Integer targetVertex : getAdjacencyList().get(startVertex)) {
-        if (!visited[targetVertex] && hasCyclic(targetVertex))
+        if (!visited[targetVertex] && hasCycle(targetVertex))
           return true;
         else if (visitHistoryForCheckingCycle[targetVertex])
           return true;
@@ -101,11 +128,11 @@ public class DirectedGraphUsingList {
     return false;
   }
 
-  public boolean hasCyclicForAll() {
+  public boolean hasCycleForAll() {
     clearVisited();
     clearVisitHistoryForCheckingCycle();
     for (int startVertex = 0; startVertex < getVertexCount(); startVertex++)
-      if (hasCyclic(startVertex))
+      if (hasCycle(startVertex))
         return true;
 
     return false;

@@ -39,6 +39,7 @@ public class DirectedGraphUsingMatrix {
       if (!visited[startVertex]) {
         stack.push(startVertex);
         visited[startVertex] = true;
+        
         while (!stack.isEmpty()) {
           int currentVertex = stack.pop();
           System.out.println(currentVertex);

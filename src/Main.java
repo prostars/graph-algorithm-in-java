@@ -65,6 +65,10 @@ public class Main {
     graphUsingList.breadthFirstSearchForAll();
     System.out.println("===================================");
     System.out.println("- check cycle -");
-    System.out.println(graphUsingList.hasCyclicForAll());
+    System.out.println(graphUsingList.hasCycleForAll());
+    System.out.println("- check cycle using stack -");
+    graphUsingList.clearVisited();
+    graphUsingList.clearVisitHistoryForCheckingCycle();
+    System.out.println(graphUsingList.hasCycleUsingStack(0));
   }
 }
