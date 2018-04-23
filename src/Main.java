@@ -7,11 +7,11 @@ public class Main {
     int[][] matrix =
       {//0  1  2  3  4  5  6
         {0, 1, 1, 0, 0, 0, 0},  // 0
-        {1, 0, 0, 0, 1, 0, 0},  // 1
-        {1, 0, 0, 0, 0, 1, 0},  // 2
+        {0, 0, 0, 0, 1, 0, 0},  // 1
+        {0, 0, 0, 0, 0, 1, 0},  // 2
         {1, 0, 0, 0, 0, 0, 0},  // 3
-        {0, 1, 0, 0, 0, 1, 1},  // 4
-        {0, 0, 1, 0, 1, 0, 0},  // 5
+        {0, 0, 0, 0, 0, 1, 1},  // 4
+        {0, 0, 0, 1, 0, 0, 0},  // 5  [cycle occurrence]
         {0, 0, 0, 0, 0, 1, 0}   // 6
       };
 
@@ -41,16 +41,12 @@ public class Main {
     adjacencyList.add(new ArrayList<>());
     adjacencyList.get(0).add(1);
     adjacencyList.get(0).add(2);
-    adjacencyList.get(1).add(0);
     adjacencyList.get(1).add(4);
-    adjacencyList.get(2).add(0);
     adjacencyList.get(2).add(5);
     adjacencyList.get(3).add(0);
-    adjacencyList.get(4).add(1);
     adjacencyList.get(4).add(5);
     adjacencyList.get(4).add(6);
-    adjacencyList.get(5).add(2);
-    adjacencyList.get(5).add(4);
+    adjacencyList.get(5).add(3);  // cycle occurrence
     adjacencyList.get(6).add(5);
     DirectedGraphUsingList graphUsingList = new DirectedGraphUsingList(adjacencyList);
     System.out.println("===================================");
@@ -67,5 +63,8 @@ public class Main {
     graphUsingList.breadthFirstSearch(0);
     System.out.println("- breadthFirstSearchForAll -");
     graphUsingList.breadthFirstSearchForAll();
+    System.out.println("===================================");
+    System.out.println("- check cycle -");
+    System.out.println(graphUsingList.hasCyclicForAll());
   }
 }
