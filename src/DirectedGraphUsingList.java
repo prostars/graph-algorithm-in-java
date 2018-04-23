@@ -11,6 +11,11 @@ public class DirectedGraphUsingList {
     visited = new boolean[getVertexCount()];
   }
 
+  public void clearVisited() {
+    for (int i = 0; i < visited.length; i++)
+      visited[i] = false;
+  }
+
   public void depthFirstSearch(int startVertex) {
     visited[startVertex] = true;
     System.out.println(startVertex);
@@ -54,7 +59,6 @@ public class DirectedGraphUsingList {
 
   public void breadthFirstSearch(int startVertex) {
     Queue<Integer> queue = new LinkedList<>();
-    clearVisited();
 
     if (!visited[startVertex]) {
       queue.offer(startVertex);
@@ -74,26 +78,9 @@ public class DirectedGraphUsingList {
   }
 
   public void breadthFirstSearchForAll() {
-    Queue<Integer> queue = new LinkedList<>();
     clearVisited();
-
-    for (int startVertex = 0; startVertex < getVertexCount(); startVertex++) {
-      if (!visited[startVertex]) {
-        queue.offer(startVertex);
-        visited[startVertex] = true;
-        while (!queue.isEmpty()) {
-          int currentVertex = queue.poll();
-          System.out.println(currentVertex);
-          List<Integer> adj = getAdjacencyList().get(currentVertex);
-          adj.forEach(targetVertex -> {
-            if (!visited[targetVertex]) {
-              queue.offer(targetVertex);
-              visited[targetVertex] = true;
-            }
-          });
-        }
-      }
-    }
+    for (int startVertex = 0; startVertex < getVertexCount(); startVertex++)
+      breadthFirstSearch(startVertex);
   }
 
   public int getVertexCount() {
@@ -102,11 +89,6 @@ public class DirectedGraphUsingList {
 
   private List<List<Integer>> getAdjacencyList() {
     return adjacencyList;
-  }
-
-  private void clearVisited() {
-    for (int i = 0; i < visited.length; i++)
-      visited[i] = false;
   }
 
   private void setVertexCount(int vertexCount) {

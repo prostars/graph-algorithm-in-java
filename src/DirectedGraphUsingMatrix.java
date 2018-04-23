@@ -10,6 +10,11 @@ public class DirectedGraphUsingMatrix {
     visited = new boolean[getVertexCount()];
   }
 
+  public void clearVisited() {
+    for (int i = 0; i < visited.length; i++)
+      visited[i] = false;
+  }
+
   public void depthFirstSearch(int startVertex) {
     visited[startVertex] = true;
     System.out.println(startVertex);
@@ -50,7 +55,7 @@ public class DirectedGraphUsingMatrix {
 
   public void breadthFirstSearch(int startVertex) {
     Queue<Integer> queue = new LinkedList<>();
-    clearVisited();
+
     if (!visited[startVertex]) {
       queue.offer(startVertex);
       visited[startVertex] = true;
@@ -68,25 +73,9 @@ public class DirectedGraphUsingMatrix {
   }
 
   public void breadthFirstSearchForAll() {
-    Queue<Integer> queue = new LinkedList<>();
     clearVisited();
-
-    for (int startVertex = 0; startVertex < getVertexCount(); startVertex++) {
-      if (!visited[startVertex]) {
-        queue.offer(startVertex);
-        visited[startVertex] = true;
-        while (!queue.isEmpty()) {
-          Integer currentVertex = queue.poll();
-          System.out.println(currentVertex);
-          for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++) {
-            if (getAdjacencyMatrix()[startVertex][targetVertex] == 1 && !visited[targetVertex]) {
-              queue.offer(targetVertex);
-              visited[targetVertex] = true;
-            }
-          }
-        }
-      }
-    }
+    for (int startVertex = 0; startVertex < getVertexCount(); startVertex++)
+      breadthFirstSearch(startVertex);
   }
 
   public int getVertexCount() {
@@ -101,11 +90,6 @@ public class DirectedGraphUsingMatrix {
     return adjacencyMatrix;
   }
 
-  private void clearVisited() {
-    for (int i = 0; i < visited.length; i++)
-      visited[i] = false;
-  }
-  
   private int vertexCount = 0;
   private boolean[] visited;
   private int[][] adjacencyMatrix;
