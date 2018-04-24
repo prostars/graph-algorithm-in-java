@@ -1,4 +1,4 @@
-# graph-algorithm-in-java
+# Implementation of graph algorithm in java
 
 * Implementation of graph algorithm using adjacency list in java
   * Depth First Search (DFS)
