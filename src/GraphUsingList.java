@@ -58,35 +58,6 @@ public class GraphUsingList {
     }
   }
 
-  public boolean hasCycleUsingStack(int startVertex) {
-    Stack<Integer> stack = new Stack<>();
-    
-    if (!visited[startVertex]) {
-      stack.push(startVertex);
-
-      while(!stack.isEmpty()) {
-        int currentVertex = stack.pop();
-        visited[currentVertex] = true;
-        visitHistoryForCheckingCycle[currentVertex] = true;
-
-        if (getAdjacencyList().get(currentVertex).isEmpty()) {
-          visitHistoryForCheckingCycle[currentVertex] = false;
-          return false;
-        }
-
-        for (Integer targetVertex : getAdjacencyList().get(currentVertex)) {
-          if (!visited[targetVertex])
-            stack.push(targetVertex);
-          else if (visitHistoryForCheckingCycle[targetVertex])
-            return true;
-        }
-      }
-    }
-    visitHistoryForCheckingCycle[startVertex] = false;
-    return false;
-  }
-
-
   public void breadthFirstSearch(int startVertex) {
     Queue<Integer> queue = new LinkedList<>();
 
@@ -135,6 +106,34 @@ public class GraphUsingList {
       if (hasCycle(startVertex))
         return true;
 
+    return false;
+  }
+
+  public boolean hasCycleUsingStack(int startVertex) {
+    Stack<Integer> stack = new Stack<>();
+
+    if (!visited[startVertex]) {
+      stack.push(startVertex);
+
+      while(!stack.isEmpty()) {
+        int currentVertex = stack.pop();
+        visited[currentVertex] = true;
+        visitHistoryForCheckingCycle[currentVertex] = true;
+
+        if (getAdjacencyList().get(currentVertex).isEmpty()) {
+          visitHistoryForCheckingCycle[currentVertex] = false;
+          return false;
+        }
+
+        for (Integer targetVertex : getAdjacencyList().get(currentVertex)) {
+          if (!visited[targetVertex])
+            stack.push(targetVertex);
+          else if (visitHistoryForCheckingCycle[targetVertex])
+            return true;
+        }
+      }
+    }
+    visitHistoryForCheckingCycle[startVertex] = false;
     return false;
   }
 

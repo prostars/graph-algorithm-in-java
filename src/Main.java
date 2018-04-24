@@ -30,6 +30,14 @@ public class Main {
     graphUsingMatrix.breadthFirstSearch(0);
     System.out.println("- breadthFirstSearchForAll -");
     graphUsingMatrix.breadthFirstSearchForAll();
+    System.out.println("===================================");
+    System.out.println("- check cycle -");
+    System.out.println(graphUsingMatrix.hasCycleForAll());
+    System.out.println("- check cycle using stack -");
+    graphUsingMatrix.clearVisited();
+    graphUsingMatrix.clearVisitHistoryForCheckingCycle();
+    System.out.println(graphUsingMatrix.hasCycleUsingStack(0));
+    System.out.println();
 
     List<List<Integer>> directedAdjacencyList = new ArrayList<>();
     directedAdjacencyList.add(new ArrayList<>());
