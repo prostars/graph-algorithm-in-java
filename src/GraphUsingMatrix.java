@@ -2,9 +2,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class DirectedGraphUsingMatrix {
+public class GraphUsingMatrix {
 
-  public DirectedGraphUsingMatrix(int[][] matrix) {
+  public GraphUsingMatrix(int[][] matrix) {
     adjacencyMatrix = matrix;
     setVertexCount(adjacencyMatrix.length);
     visited = new boolean[getVertexCount()];

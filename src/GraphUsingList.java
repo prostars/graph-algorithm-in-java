@@ -1,8 +1,8 @@
 import java.util.*;
 
-public class DirectedGraphUsingList {
+public class GraphUsingList {
 
-  public DirectedGraphUsingList(List<List<Integer>> adjacencyList) {
+  public GraphUsingList(List<List<Integer>> adjacencyList) {
     this.adjacencyList = adjacencyList;
     setVertexCount(adjacencyList.size());
     visited = new boolean[getVertexCount()];

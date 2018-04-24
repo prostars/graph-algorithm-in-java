@@ -4,7 +4,7 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) {
-    int[][] matrix =
+    int[][] directedGraphAdjacencyMatrix =
       {//0  1  2  3  4  5  6
         {0, 1, 1, 0, 0, 0, 0},  // 0
         {0, 0, 0, 0, 1, 0, 0},  // 1
@@ -15,9 +15,9 @@ public class Main {
         {0, 0, 0, 0, 0, 1, 0}   // 6
       };
 
-    DirectedGraphUsingMatrix graphUsingMatrix = new DirectedGraphUsingMatrix(matrix);
+    GraphUsingMatrix graphUsingMatrix = new GraphUsingMatrix(directedGraphAdjacencyMatrix);
     System.out.println("===================================");
-    System.out.println("- DirectedGraphUsingMatrix -");
+    System.out.println("- GraphUsingMatrix -");
     System.out.println("- depthFirstSearch -");
     graphUsingMatrix.clearVisited();
     graphUsingMatrix.depthFirstSearch(0);
@@ -31,26 +31,26 @@ public class Main {
     System.out.println("- breadthFirstSearchForAll -");
     graphUsingMatrix.breadthFirstSearchForAll();
 
-    List<List<Integer>> adjacencyList = new ArrayList<>();
-    adjacencyList.add(new ArrayList<>());
-    adjacencyList.add(new ArrayList<>());
-    adjacencyList.add(new ArrayList<>());
-    adjacencyList.add(new ArrayList<>());
-    adjacencyList.add(new ArrayList<>());
-    adjacencyList.add(new ArrayList<>());
-    adjacencyList.add(new ArrayList<>());
-    adjacencyList.get(0).add(1);
-    adjacencyList.get(0).add(2);
-    adjacencyList.get(1).add(4);
-    adjacencyList.get(2).add(5);
-    adjacencyList.get(3).add(0);
-    adjacencyList.get(4).add(5);
-    adjacencyList.get(4).add(6);
-    adjacencyList.get(5).add(3);  // cycle occurrence
-    adjacencyList.get(6).add(5);
-    DirectedGraphUsingList graphUsingList = new DirectedGraphUsingList(adjacencyList);
+    List<List<Integer>> directedAdjacencyList = new ArrayList<>();
+    directedAdjacencyList.add(new ArrayList<>());
+    directedAdjacencyList.add(new ArrayList<>());
+    directedAdjacencyList.add(new ArrayList<>());
+    directedAdjacencyList.add(new ArrayList<>());
+    directedAdjacencyList.add(new ArrayList<>());
+    directedAdjacencyList.add(new ArrayList<>());
+    directedAdjacencyList.add(new ArrayList<>());
+    directedAdjacencyList.get(0).add(1);
+    directedAdjacencyList.get(0).add(2);
+    directedAdjacencyList.get(1).add(4);
+    directedAdjacencyList.get(2).add(5);
+    directedAdjacencyList.get(3).add(0);
+    directedAdjacencyList.get(4).add(5);
+    directedAdjacencyList.get(4).add(6);
+    directedAdjacencyList.get(5).add(3);  // cycle occurrence
+    directedAdjacencyList.get(6).add(5);
+    GraphUsingList graphUsingList = new GraphUsingList(directedAdjacencyList);
     System.out.println("===================================");
-    System.out.println("- DirectedGraphUsingList -");
+    System.out.println("- GraphUsingList -");
     System.out.println("- depthFirstSearch -");
     graphUsingList.clearVisited();
     graphUsingList.depthFirstSearch(0);
