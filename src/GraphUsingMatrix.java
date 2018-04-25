@@ -1,15 +1,23 @@
+import com.sun.istack.internal.NotNull;
+import javafx.util.Pair;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.stream.IntStream;
 
 public class GraphUsingMatrix {
 
-  public GraphUsingMatrix(int[][] matrix) {
+  public GraphUsingMatrix(@NotNull final int[][] matrix) {
     adjacencyMatrix = matrix;
     setVertexCount(adjacencyMatrix.length);
     visited = new boolean[getVertexCount()];
     visitHistoryForCheckingCycle = new boolean[getVertexCount()];
+  }
+
+  public int getVertexCount() {
+    return vertexCount;
   }
 
   public void clearVisited() {
@@ -22,7 +30,7 @@ public class GraphUsingMatrix {
       visitHistoryForCheckingCycle[i] = false;
   }
 
-  public void depthFirstSearch(int startVertex) {
+  public void depthFirstSearch(final int startVertex) {
     visited[startVertex] = true;
     System.out.println(startVertex);
 
@@ -61,7 +69,7 @@ public class GraphUsingMatrix {
     }
   }
 
-  public void breadthFirstSearch(int startVertex) {
+  public void breadthFirstSearch(final int startVertex) {
     Queue<Integer> queue = new LinkedList<>();
 
     if (!visited[startVertex]) {
@@ -86,7 +94,7 @@ public class GraphUsingMatrix {
       breadthFirstSearch(startVertex);
   }
 
-  public boolean hasCycle(int startVertex) {
+  public boolean hasCycle(final int startVertex) {
     if (!visited[startVertex]) {
       visited[startVertex] = true;
       visitHistoryForCheckingCycle[startVertex] = true;
@@ -112,7 +120,7 @@ public class GraphUsingMatrix {
     return false;
   }
 
-  public boolean hasCycleUsingStack(int startVertex) {
+  public boolean hasCycleUsingStack(final int startVertex) {
     Stack<Integer> stack = new Stack<>();
 
     if (!visited[startVertex]) {
@@ -140,11 +148,39 @@ public class GraphUsingMatrix {
     return false;
   }
 
-  public int getVertexCount() {
-    return vertexCount;
+  public int countInDirectedCycleOfDistanceN(final int distance) {
+    clearVisited();
+    cycleCount = 0;
+
+    if (distance < 1)
+      return 0;
+
+    for (int startVertex = 0; startVertex < getVertexCount() - (distance - 1); startVertex++) {
+      countInDirectedCycleOfDistanceN(distance - 1, startVertex, startVertex);
+      visited[startVertex] = true;
+    }
+
+    return cycleCount;
   }
 
-  private void setVertexCount(int vertexCount) {
+  private void countInDirectedCycleOfDistanceN(final int remainDistance, final int currentVertex, final int startVertex) {
+    visited[currentVertex] = true;
+
+    if (remainDistance == 0) {
+      visited[currentVertex] = false;
+      if (getAdjacencyMatrix()[currentVertex][startVertex] == 1)
+        cycleCount++;
+      return;
+    }
+
+    for (int targetVertex = 0; targetVertex < getVertexCount(); targetVertex++)
+      if (!visited[targetVertex] && getAdjacencyMatrix()[currentVertex][targetVertex] == 1)
+        countInDirectedCycleOfDistanceN(remainDistance - 1, targetVertex, startVertex);
+
+    visited[currentVertex] = false;
+  }
+
+  private void setVertexCount(final int vertexCount) {
     this.vertexCount = vertexCount;
   }
 
@@ -153,6 +189,7 @@ public class GraphUsingMatrix {
   }
 
   private int vertexCount = 0;
+  private int cycleCount = 0;
   private boolean[] visited;
   private boolean[] visitHistoryForCheckingCycle;
   private int[][] adjacencyMatrix;

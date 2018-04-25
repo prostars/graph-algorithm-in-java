@@ -4,16 +4,14 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) {
+
     int[][] directedGraphAdjacencyMatrix =
-      {//0  1  2  3  4  5  6
-        {0, 1, 1, 0, 0, 0, 0},  // 0
-        {0, 0, 0, 0, 1, 0, 0},  // 1
-        {0, 0, 0, 0, 0, 1, 0},  // 2
-        {1, 0, 0, 0, 0, 0, 0},  // 3
-        {0, 0, 0, 0, 0, 1, 1},  // 4
-        {0, 0, 0, 1, 0, 0, 0},  // 5  [cycle occurrence]
-        {0, 0, 0, 0, 0, 1, 0}   // 6
-      };
+      {//0  1  2  3  4
+        {0, 1, 0, 0, 0},  // 0
+        {0, 0, 1, 1, 0},  // 1
+        {0, 0, 0, 1, 1},  // 2
+        {1, 0, 0, 0, 1},  // 3
+        {1, 0, 0, 1, 0}}; // 4
 
     GraphUsingMatrix graphUsingMatrix = new GraphUsingMatrix(directedGraphAdjacencyMatrix);
     System.out.println("===================================");
@@ -37,6 +35,16 @@ public class Main {
     graphUsingMatrix.clearVisited();
     graphUsingMatrix.clearVisitHistoryForCheckingCycle();
     System.out.println(graphUsingMatrix.hasCycleUsingStack(0));
+    System.out.println("===================================");
+    System.out.println("- count cycle of distance 2 -");
+    System.out.println(graphUsingMatrix.countInDirectedCycleOfDistanceN(2));
+    System.out.println("- count cycle of distance 3 -");
+    System.out.println(graphUsingMatrix.countInDirectedCycleOfDistanceN(3));
+    System.out.println("- count cycle of distance 4 -");
+    System.out.println(graphUsingMatrix.countInDirectedCycleOfDistanceN(4));
+    System.out.println("- count cycle of distance 5 -");
+    System.out.println(graphUsingMatrix.countInDirectedCycleOfDistanceN(5));
+
     System.out.println();
 
     List<List<Integer>> directedAdjacencyList = new ArrayList<>();
@@ -45,17 +53,16 @@ public class Main {
     directedAdjacencyList.add(new ArrayList<>());
     directedAdjacencyList.add(new ArrayList<>());
     directedAdjacencyList.add(new ArrayList<>());
-    directedAdjacencyList.add(new ArrayList<>());
-    directedAdjacencyList.add(new ArrayList<>());
     directedAdjacencyList.get(0).add(1);
-    directedAdjacencyList.get(0).add(2);
-    directedAdjacencyList.get(1).add(4);
-    directedAdjacencyList.get(2).add(5);
+    directedAdjacencyList.get(1).add(2);
+    directedAdjacencyList.get(1).add(3);
+    directedAdjacencyList.get(2).add(3);
+    directedAdjacencyList.get(2).add(4);
     directedAdjacencyList.get(3).add(0);
-    directedAdjacencyList.get(4).add(5);
-    directedAdjacencyList.get(4).add(6);
-    directedAdjacencyList.get(5).add(3);  // cycle occurrence
-    directedAdjacencyList.get(6).add(5);
+    directedAdjacencyList.get(3).add(4);
+    directedAdjacencyList.get(4).add(0);
+    directedAdjacencyList.get(4).add(3);
+
     GraphUsingList graphUsingList = new GraphUsingList(directedAdjacencyList);
     System.out.println("===================================");
     System.out.println("- GraphUsingList -");

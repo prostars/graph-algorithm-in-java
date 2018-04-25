@@ -1,8 +1,10 @@
+import com.sun.istack.internal.NotNull;
+
 import java.util.*;
 
 public class GraphUsingList {
 
-  public GraphUsingList(List<List<Integer>> adjacencyList) {
+  public GraphUsingList(@NotNull final List<List<Integer>> adjacencyList) {
     this.adjacencyList = adjacencyList;
     setVertexCount(adjacencyList.size());
     visited = new boolean[getVertexCount()];
@@ -58,7 +60,7 @@ public class GraphUsingList {
     }
   }
 
-  public void breadthFirstSearch(int startVertex) {
+  public void breadthFirstSearch(final int startVertex) {
     Queue<Integer> queue = new LinkedList<>();
 
     if (!visited[startVertex]) {
@@ -84,7 +86,7 @@ public class GraphUsingList {
       breadthFirstSearch(startVertex);
   }
 
-  public boolean hasCycle(int startVertex) {
+  public boolean hasCycle(final int startVertex) {
     if (!visited[startVertex]) {
       visited[startVertex] = true;
       visitHistoryForCheckingCycle[startVertex] = true;
@@ -109,7 +111,7 @@ public class GraphUsingList {
     return false;
   }
 
-  public boolean hasCycleUsingStack(int startVertex) {
+  public boolean hasCycleUsingStack(final int startVertex) {
     Stack<Integer> stack = new Stack<>();
 
     if (!visited[startVertex]) {
